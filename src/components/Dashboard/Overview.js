@@ -258,11 +258,33 @@ function Overview({ settings, getMarketHistory }) {
               </Select>
               <div className="value">Overview</div>
             </AssetSelectWrapper>
-            {window.ethereum && window.ethereum.networkVersion && settings.walletType === 'metamask' && (
-              <div className="flex align-center add-token-wrapper">
-                {currentAsset !== 'bnb' && (
-                  <div className="flex align-center underlying-asset">
-                    {currentAsset.toUpperCase()}
+            {window.ethereum &&
+              window.ethereum.networkVersion &&
+              settings.walletType === 'metamask' && (
+                <div className="flex align-center add-token-wrapper">
+                  {currentAsset !== 'bnb' && (
+                    <div className="flex align-center underlying-asset">
+                      {currentAsset.toUpperCase()}
+                      <Icon
+                        className="add-token"
+                        type="plus-circle"
+                        theme="filled"
+                        onClick={() =>
+                          addToken(
+                            currentAsset,
+                            settings.decimals[currentAsset].token,
+                            'token'
+                          )
+                        }
+                      />
+                    </div>
+                  )}
+                  <div className="flex align-center vtoken-asset">
+                    {`v${
+                      currentAsset === 'btcb'
+                        ? 'BTC'
+                        : currentAsset.toUpperCase()
+                    }`}
                     <Icon
                       className="add-token"
                       type="plus-circle"
@@ -270,33 +292,15 @@ function Overview({ settings, getMarketHistory }) {
                       onClick={() =>
                         addToken(
                           currentAsset,
-                          settings.decimals[currentAsset].token,
-                          'token'
+                          settings.decimals[currentAsset].vtoken,
+                          'vtoken'
                         )
                       }
                     />
                   </div>
-                )}
-                <div className="flex align-center vtoken-asset">
-                  {`v${
-                    currentAsset === 'btcb' ? 'BTC' : currentAsset.toUpperCase()
-                  }`}
-                  <Icon
-                    className="add-token"
-                    type="plus-circle"
-                    theme="filled"
-                    onClick={() =>
-                      addToken(
-                        currentAsset,
-                        settings.decimals[currentAsset].vtoken,
-                        'vtoken'
-                      )
-                    }
-                  />
+                  <p className="destination">To MetaMask</p>
                 </div>
-                <p className="destination">To MetaMask</p>
-              </div>
-            )}
+              )}
           </div>
           {/* <p className="value">{`$${
               (settings.marketType || 'supply') === 'supply'
@@ -307,7 +311,13 @@ function Overview({ settings, getMarketHistory }) {
         </div>
         <div className="historic-label">Historical rates</div>
         <div className="flex flex-column flex-end">
-          <p className={(settings.marketType || 'supply') === 'supply' || currentAPY >= 0  ? "apy-value" : "apy-value-red"}>
+          <p
+            className={
+              (settings.marketType || 'supply') === 'supply' || currentAPY >= 0
+                ? 'apy-value'
+                : 'apy-value-red'
+            }
+          >
             {currentAPY}%
           </p>
           <p className="apy-label">
@@ -401,30 +411,6 @@ function Overview({ settings, getMarketHistory }) {
                 .dp(2, 1)
                 .toString(10)
             )}`}
-          </p>
-        </div>
-        <div className="description">
-          <p className="label">Exchange Rate</p>
-          <p className="value">
-            {`1 ${marketInfo.underlyingSymbol || ''} = ${Number(
-              new BigNumber(1)
-                .div(
-                  new BigNumber(marketInfo.exchangeRate).div(
-                    new BigNumber(10).pow(
-                      18 +
-                        +parseInt(
-                          settings.decimals[currentAsset || 'sxp'].token,
-                          10
-                        ) -
-                        +parseInt(
-                          settings.decimals[currentAsset || 'sxp'].vtoken,
-                          10
-                        )
-                    )
-                  )
-                )
-                .toString(10)
-            ).toFixed(6)} ${marketInfo.symbol || ''}`}
           </p>
         </div>
       </CardWrapper>

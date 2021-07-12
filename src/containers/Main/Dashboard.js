@@ -294,15 +294,16 @@ function Dashboard({ settings, setSetting }) {
             <Row>
               <Column xs="12" sm="12" md="5">
                 <Row>
-                  <Column xs="12">
+                  {/* <Column xs="12">
                     <CoinInfo />
                   </Column>
                   <Column xs="12">
                     <VaiInfo />
-                  </Column>
+                  </Column> */}
                   <Column xs="12">
-                    <BorrowLimit />
+                    <WalletBalance />
                   </Column>
+
                   <Column xs="12">
                     <Overview />
                   </Column>
@@ -311,7 +312,7 @@ function Dashboard({ settings, setSetting }) {
               <Column xs="12" sm="12" md="7">
                 <Row>
                   <Column xs="12">
-                    <WalletBalance />
+                    <BorrowLimit />
                   </Column>
                   <Column xs="12">
                     <Market />

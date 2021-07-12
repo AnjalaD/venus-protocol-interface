@@ -4,7 +4,6 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connectAccount, accountActionCreators } from 'core';
 import styled from 'styled-components';
-import CircleProgressBar from 'components/Basic/CircleProgressBar';
 import BigNumber from 'bignumber.js';
 import commaNumber from 'comma-number';
 import AnimatedNumber from 'animated-number-react';
@@ -32,14 +31,12 @@ const CardWrapper = styled.div`
     font-size: 25px;
     font-weight: 900;
     color: var(--color-text-main);
-    margin-top: 44px;
   }
 
   .apy-toggle {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
 
     .toggel-label {
       margin-top: 15px;
@@ -71,10 +68,10 @@ const CardWrapper = styled.div`
 
 const BalancerWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 0;
 `;
 
 const format = commaNumber.bindWith(',', '.');
@@ -194,7 +191,7 @@ function WalletBalance({ settings, setSetting }) {
     <Card>
       <CardWrapper className="flex just-between">
         <Row>
-          <Column xs="12" sm="4">
+          <Column xs="12">
             <BalancerWrapper>
               <p className="label">Supply Balance</p>
               <p className="value">
@@ -206,8 +203,17 @@ function WalletBalance({ settings, setSetting }) {
               </p>
             </BalancerWrapper>
           </Column>
-          <Column xs="12" sm="4">
-            <CircleProgressBar percent={netAPY} width={150} label="Net APY" />
+          <Column xs="12">
+            <BalancerWrapper>
+              <p className="label">Net APY</p>
+              <p className="value">
+                <AnimatedNumber
+                  value={netAPY}
+                  formatValue={val => `${val}%`}
+                  duration={2000}
+                />
+              </p>
+            </BalancerWrapper>
             <div className="apy-toggle">
               <Toggle
                 checked={withXVS}
@@ -227,7 +233,7 @@ function WalletBalance({ settings, setSetting }) {
               </Label>
             </div>
           </Column>
-          <Column xs="12" sm="4">
+          <Column xs="12">
             <BalancerWrapper>
               <p className="label">Borrow Balance</p>
               <p className="value">

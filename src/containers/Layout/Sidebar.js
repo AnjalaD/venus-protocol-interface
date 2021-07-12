@@ -668,7 +668,7 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
           <Icon type="home" theme="filled" />
           <Label primary>Dashboard</Label>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           className="flex flex-start align-center"
           to="/vote"
           activeClassName="active"
@@ -700,7 +700,7 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
         >
           <Icon type="golden" theme="filled" />
           <Label primary>Vault</Label>
-        </NavLink>
+        </NavLink> */}
       </MainMenu>
       <FaucetMenu>
         {process.env.REACT_APP_ENV === 'dev' && (
@@ -771,7 +771,7 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
               Dashboard
             </Label>
           </Option>
-          <Option className="flex align-center just-center" value="vote">
+          {/* <Option className="flex align-center just-center" value="vote">
             <Label size={14} primary>
               Vote
             </Label>
@@ -790,7 +790,7 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
             <Label size={14} primary>
               Vault
             </Label>
-          </Option>
+          </Option> */}
           {process.env.REACT_APP_ENV === 'dev' && (
             <Option className="flex align-center just-center" value="faucet">
               <Label size={14} primary>

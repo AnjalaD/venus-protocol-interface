@@ -59,7 +59,7 @@ class App extends React.Component {
                 className="switch-wrapper"
               >
                 <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/vote" component={Vote} />
+                {/* <Route exact path="/vote" component={Vote} />
                 <Route exact path="/xvs" component={XVS} />
                 <Route exact path="/market" component={Market} />
                 <Route exact path="/vault" component={Vault} />
@@ -78,7 +78,7 @@ class App extends React.Component {
                   exact
                   path="/vote/address/:address"
                   component={ProposerDetail}
-                />
+                /> */}
                 {process.env.REACT_APP_ENV === 'dev' && (
                   <Route exact path="/faucet" component={Faucet} />
                 )}
