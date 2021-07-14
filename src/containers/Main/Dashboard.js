@@ -6,8 +6,8 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import MainLayout from 'containers/Layout/MainLayout';
-import CoinInfo from 'components/Dashboard/CoinInfo';
-import VaiInfo from 'components/Dashboard/VaiInfo';
+// import CoinInfo from 'components/Dashboard/CoinInfo';
+// import VaiInfo from 'components/Dashboard/VaiInfo';
 import BorrowLimit from 'components/Dashboard/BorrowLimit';
 import Overview from 'components/Dashboard/Overview';
 import WalletBalance from 'components/Dashboard/WalletBalance';
@@ -21,11 +21,11 @@ import {
   getComptrollerContract,
   getVaiControllerContract,
   getVaiTokenContract,
-  methods
+  methods,
+  getWeb3
 } from 'utilities/ContractService';
 import BigNumber from 'bignumber.js';
 import * as constants from 'utilities/constants';
-import { getWeb3 } from 'utilities/ContractService';
 
 const DashboardWrapper = styled.div`
   height: 100%;
@@ -303,7 +303,9 @@ function Dashboard({ settings, setSetting }) {
                   <Column xs="12">
                     <WalletBalance />
                   </Column>
-
+                  <Column xs="12">
+                    <BorrowLimit />
+                  </Column>
                   <Column xs="12">
                     <Overview />
                   </Column>
@@ -311,9 +313,6 @@ function Dashboard({ settings, setSetting }) {
               </Column>
               <Column xs="12" sm="12" md="7">
                 <Row>
-                  <Column xs="12">
-                    <BorrowLimit />
-                  </Column>
                   <Column xs="12">
                     <Market />
                   </Column>

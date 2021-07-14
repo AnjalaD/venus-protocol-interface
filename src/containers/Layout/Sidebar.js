@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { compose } from 'recompose';
 import { NavLink, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { Select, Icon } from 'antd';
+import { Select } from 'antd';
 import BigNumber from 'bignumber.js';
 import {
   getTokenContract,
@@ -24,21 +24,16 @@ import logoImg from 'assets/img/logo.png';
 import commaNumber from 'comma-number';
 import { checkIsValidNetwork, getBigNumber } from 'utilities/common';
 import toast from 'components/Basic/Toast';
-import XVSIcon from 'assets/img/venus.svg';
-import XVSActiveIcon from 'assets/img/venus_active.svg';
 
 const SidebarWrapper = styled.div`
-  height: 100vh;
-  min-width: 108px;
-  border-radius: 25px;
   background-color: var(--color-bg-primary);
   display: flex;
-  flex-direction: column;
-  margin-right: 30px;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
 
   @media only screen and (max-width: 768px) {
     display: flex;
-    height: 60px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -48,9 +43,10 @@ const SidebarWrapper = styled.div`
 
 const Logo = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  padding-top: 54px;
+  flex-grow: 1;
+
   i {
     font-size: 18px;
   }
@@ -72,140 +68,9 @@ const Logo = styled.div`
   }
 `;
 
-const MainMenu = styled.div`
-  margin-top: 100px;
-
-  @media only screen and (max-width: 768px) {
-    margin: 0 20px;
-  }
-
-  .xvs-active-icon {
-    display: none;
-  }
-
-  a {
-    padding: 7px;
-    i,
-    img {
-      width: 20%;
-      margin: 0 10%;
-      svg {
-        fill: var(--color-text-main);
-      }
-    }
-    img {
-      width: 10%;
-      margin: 0 13%;
-    }
-    span {
-      width: 80%;
-    }
-    @media only screen and (max-width: 1440px) {
-      span {
-        font-size: 14px;
-      }
-    }
-
-    @media only screen and (max-width: 1280px) {
-      span {
-        font-size: 12px;
-      }
-    }
-    &:not(:last-child) {
-      margin-bottom: 30px;
-    }
-
-    &:hover {
-      svg {
-        fill: var(--color-yellow);
-      }
-      span {
-        color: var(--color-yellow);
-      }
-      .xvs-icon {
-        display: none;
-      }
-      .xvs-active-icon {
-        display: block;
-      }
-    }
-  }
-
-  .active {
-    background-color: var(--color-bg-active);
-    svg {
-      fill: var(--color-yellow);
-    }
-    span {
-      color: var(--color-yellow);
-    }
-    .xvs-icon {
-      display: none;
-    }
-    .xvs-active-icon {
-      display: block;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const FaucetMenu = styled.div`
-  width: 100%;
-  margin-top: auto;
-  margin-bottom: 20px;
-  a {
-    padding: 7px 0px;
-    svg {
-      fill: var(--color-text-main);
-      margin-left: 34px;
-      margin-right: 26px;
-    }
-    &:not(:last-child) {
-      margin-bottom: 48px;
-    }
-
-    &:hover {
-      svg {
-        fill: var(--color-yellow);
-      }
-      span {
-        color: var(--color-yellow);
-      }
-    }
-
-    @media only screen and (max-width: 1440px) {
-      span {
-        font-size: 14px;
-      }
-    }
-
-    @media only screen and (max-width: 1280px) {
-      span {
-        font-size: 12px;
-      }
-    }
-  }
-  .active {
-    background-color: var(--color-bg-active);
-    svg {
-      fill: var(--color-yellow);
-    }
-    span {
-      color: var(--color-yellow);
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
 const TotalValue = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
+  padding: 0 30px;
+  flex-shrink: 0;
 
   > div {
     span:first-child {
@@ -245,21 +110,16 @@ const MobileMenu = styled.div`
 const ConnectButton = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-left: 30px;
 
   @media only screen and (max-width: 768px) {
     margin: 0;
   }
 
   .connect-btn {
-    width: 114px;
     height: 30px;
     border-radius: 5px;
     background-image: linear-gradient(to right, #f2c265, #f7b44f);
-
-    @media only screen and (max-width: 768px) {
-      width: 60px;
-    }
 
     .MuiButton-label {
       font-size: 13px;
@@ -659,60 +519,6 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
           <img src={logoImg} alt="logo" className="logo-text" />
         </NavLink>
       </Logo>
-      <MainMenu>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/dashboard"
-          activeClassName="active"
-        >
-          <Icon type="home" theme="filled" />
-          <Label primary>Dashboard</Label>
-        </NavLink>
-        {/* <NavLink
-          className="flex flex-start align-center"
-          to="/vote"
-          activeClassName="active"
-        >
-          <Icon type="appstore" />
-          <Label primary>Vote</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/xvs"
-          activeClassName="active"
-        >
-          <img className="xvs-icon" src={XVSIcon} alt="xvs" />
-          <img className="xvs-active-icon" src={XVSActiveIcon} alt="xvs" />
-          <Label primary>XVS</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/market"
-          activeClassName="active"
-        >
-          <Icon type="area-chart" />
-          <Label primary>Market</Label>
-        </NavLink>
-        <NavLink
-          className="flex flex-start align-center"
-          to="/vault"
-          activeClassName="active"
-        >
-          <Icon type="golden" theme="filled" />
-          <Label primary>Vault</Label>
-        </NavLink> */}
-      </MainMenu>
-      <FaucetMenu>
-        {process.env.REACT_APP_ENV === 'dev' && (
-          <NavLink
-            className="flex just-center"
-            to="/faucet"
-            activeClassName="active"
-          >
-            <Label primary>Faucet</Label>
-          </NavLink>
-        )}
-      </FaucetMenu>
       {settings.selectedAddress && (
         <TotalValue>
           <div className="flex flex-column align-center just-center">
@@ -771,26 +577,6 @@ function Sidebar({ history, settings, setSetting, getGovernanceVenus }) {
               Dashboard
             </Label>
           </Option>
-          {/* <Option className="flex align-center just-center" value="vote">
-            <Label size={14} primary>
-              Vote
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="xvs">
-            <Label size={14} primary>
-              XVS
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="market">
-            <Label size={14} primary>
-              Market
-            </Label>
-          </Option>
-          <Option className="flex align-center just-center" value="vault">
-            <Label size={14} primary>
-              Vault
-            </Label>
-          </Option> */}
           {process.env.REACT_APP_ENV === 'dev' && (
             <Option className="flex align-center just-center" value="faucet">
               <Label size={14} primary>

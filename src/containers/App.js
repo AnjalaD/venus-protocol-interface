@@ -10,14 +10,14 @@ import enMessages from 'lang/en';
 import { store } from 'core';
 import Dashboard from 'containers/Main/Dashboard';
 import Faucet from 'containers/Main/Faucet';
-import Vote from 'containers/Main/Vote';
-import XVS from 'containers/Main/XVS';
-import Market from 'containers/Main/Market';
-import Vault from 'containers/Main/Vault';
-import MarketDetail from 'containers/Main/MarketDetail';
-import VoteOverview from 'containers/Main/VoteOverview';
-import ProposerDetail from 'containers/Main/ProposerDetail';
-import VoterLeaderboard from 'containers/Main/VoterLeaderboard';
+// import Vote from 'containers/Main/Vote';
+// import XVS from 'containers/Main/XVS';
+// import Market from 'containers/Main/Market';
+// import Vault from 'containers/Main/Vault';
+// import MarketDetail from 'containers/Main/MarketDetail';
+// import VoteOverview from 'containers/Main/VoteOverview';
+// import ProposerDetail from 'containers/Main/ProposerDetail';
+// import VoterLeaderboard from 'containers/Main/VoterLeaderboard';
 import Theme from './Theme';
 
 import 'assets/styles/App.scss';
@@ -59,26 +59,6 @@ class App extends React.Component {
                 className="switch-wrapper"
               >
                 <Route exact path="/dashboard" component={Dashboard} />
-                {/* <Route exact path="/vote" component={Vote} />
-                <Route exact path="/xvs" component={XVS} />
-                <Route exact path="/market" component={Market} />
-                <Route exact path="/vault" component={Vault} />
-                <Route exact path="/market/:asset" component={MarketDetail} />
-                <Route
-                  exact
-                  path="/vote/leaderboard"
-                  component={VoterLeaderboard}
-                />
-                <Route
-                  exact
-                  path="/vote/proposal/:id"
-                  component={VoteOverview}
-                />
-                <Route
-                  exact
-                  path="/vote/address/:address"
-                  component={ProposerDetail}
-                /> */}
                 {process.env.REACT_APP_ENV === 'dev' && (
                   <Route exact path="/faucet" component={Faucet} />
                 )}

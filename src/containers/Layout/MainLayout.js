@@ -12,9 +12,13 @@ const MainLayoutWrapper = styled.div`
   background-color: var(--color-bg-main);
 
   .main {
-    height: 100vh;
+    min-height: 100vh;
     overflow: auto;
     overflow-x: hidden;
+
+    @media only screen and (min-width: 768px) {
+      padding: 0 min(5%, 100px);
+    }
 
     .main-content {
       display: flex;
@@ -55,10 +59,10 @@ function MainLayout({ title, isHeader, children }) {
   return (
     <MainLayoutWrapper>
       <Row>
-        <Column xs="12" sm="1.5">
+        <Column xs="12">
           <Sidebar />
         </Column>
-        <Column xs="12" sm="10.5" className="main">
+        <Column xs="12" className="main">
           <Row>
             {isHeader && (
               <Column xs="12">
